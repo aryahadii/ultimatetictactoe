@@ -20,6 +20,7 @@
 package com.theaigames.core;
 
 import com.theaigames.core.game.IGame;
+import com.theaigames.core.game.logic.ILogicHandler;
 import com.theaigames.core.io.IOPlayer;
 
 import java.io.IOException;
@@ -30,15 +31,15 @@ import java.util.List;
  * Engine class
  * <p>
  * A general engine to implement IO for bot classes
- * All game game is handled by implemented game interfaces.
+ * All logic is handled by implemented logic interfaces.
  *
  * @author Jackie Xu <jackie@starapple.nl>, Jim van Eeden <jim@starapple.nl>
  */
 public class Engine {
 
     private List<IOPlayer> players;
+    private ILogicHandler logic;
     private boolean isRunning;
-    private IGame game;
 
     public Engine() {
         this.isRunning = false;
@@ -46,7 +47,7 @@ public class Engine {
     }
 
     /**
-     * Start up the bot process and add the player to the game
+     * Start up the bot process and add the player to the logic
      *
      * @param command : command to start a bot process
      */
@@ -59,50 +60,47 @@ public class Engine {
     }
 
     /**
-     * Sets the game's game
+     * Sets the engine's logic
      *
-     * @param game
+     * @param logic
      */
-    public void setGame(IGame game) {
-        this.game = game;
+    public void setLogic(ILogicHandler logic) {
+        this.logic = logic;
     }
 
     /**
-     * Determines whether the game has ended
+     * Determines whether the logic has ended
      *
-     * @return : true if the game has ended
+     * @return : true if the logic has ended
      */
     public boolean hasEnded() {
-        return this.game.isGameOver();
+        return this.logic.isGameOver();
     }
 
     /**
-     * @return : A list of all the players in this game
+     * @return : A list of all the players in this logic
      */
     public List<IOPlayer> getPlayers() {
         return this.players;
     }
 
     /**
-     * Starts the game
+     * Starts the logic
      */
-    public void start() throws Exception {
+    public void start() {
         this.isRunning = true;
 
-        this.game.setupGame(this.players);
-
         for (int round = 0; this.isRunning; round++) {
-            this.game.playRound(round);
+            for (IOPlayer ioPlayer : this.getPlayers())
+                ioPlayer.addToDump(String.format("Round %d", round));
+
+            this.logic.playRound(round);
 
             if (this.hasEnded()) {
                 System.out.println("stopping...");
 
                 this.isRunning = false;
-                try {
-                    this.game.finish();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                return;
             }
         }
     }

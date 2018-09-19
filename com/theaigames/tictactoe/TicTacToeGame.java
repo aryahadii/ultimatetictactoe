@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.theaigames.core.io.IOPlayer;
 import com.theaigames.core.game.AbstractGame;
 import com.theaigames.tictactoe.field.Field;
 import com.theaigames.tictactoe.logic.TicTacToeLogic;
@@ -22,6 +21,7 @@ public class TicTacToeGame extends AbstractGame {
         super();
 
         this.addPlayersToEngine(botsExecPaths);
+        this.setupGame();
     }
 
     private void addPlayersToEngine(List<String> botsExecPaths) throws IOException {
@@ -31,20 +31,19 @@ public class TicTacToeGame extends AbstractGame {
         }
     }
 
-    @Override
-    public void setupGame(List<IOPlayer> ioPlayers) {
+    private void setupGame() {
         this.gameField = new Field();
 
         this.players = new ArrayList<>();
-        for (int i = 0; i < ioPlayers.size(); i++) {
+        for (int i = 0; i < engine.getPlayers().size(); i++) {
             String playerName = String.format("player%d", i + 1);
-            Player player = new Player(playerName, ioPlayers.get(i), TIME_BANK_MAX_MS, MOVE_TIMEOUT_MS, i + 1);
+            Player player = new Player(playerName, engine.getPlayers().get(i), TIME_BANK_MAX_MS, MOVE_TIMEOUT_MS, i + 1);
             this.players.add(player);
 
         }
         this.players.forEach(this::sendGameSettings);
 
-        super.processor = new TicTacToeLogic(this.players, this.gameField);
+        super.logic = new TicTacToeLogic(this.players, this.gameField);
     }
 
     private void sendGameSettings(Player player) {

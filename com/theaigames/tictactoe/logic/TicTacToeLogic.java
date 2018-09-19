@@ -22,17 +22,16 @@ package com.theaigames.tictactoe.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.theaigames.core.game.logic.LogicHandler;
+import com.theaigames.core.game.logic.ILogicHandler;
 import com.theaigames.core.game.player.AbstractPlayer;
 import com.theaigames.tictactoe.field.Field;
 import com.theaigames.tictactoe.moves.Move;
 import com.theaigames.tictactoe.moves.MoveResult;
 import com.theaigames.tictactoe.player.Player;
 
-public class TicTacToeLogic implements LogicHandler {
+public class TicTacToeLogic implements ILogicHandler {
 
     private int mMoveNumber = 1;
-    private int mRoundNumber = -1;
     private List<Player> mPlayers;
     private List<Move> mMoves;
     private List<MoveResult> mMoveResults;
@@ -49,7 +48,6 @@ public class TicTacToeLogic implements LogicHandler {
     @Override
     public void playRound(int roundNumber) {
         System.out.println(String.format("playing round %d", roundNumber));
-        mRoundNumber = roundNumber;
         for (Player player : mPlayers) {
             if (!isGameOver()) {
                 player.sendUpdate("round", roundNumber);
@@ -111,11 +109,6 @@ public class TicTacToeLogic implements LogicHandler {
         MoveResult moveResult = new MoveResult(player, move, oldFieldPresentationString, mField);
         moveResult.setMoveNumber(mMoveNumber);
         mMoveResults.add(moveResult);
-    }
-
-    @Override
-    public int getRoundNumber() {
-        return this.mRoundNumber;
     }
 
     @Override

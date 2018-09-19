@@ -33,9 +33,5 @@ import java.util.List;
  * @author Jackie Xu <jackie@starapple.nl>, Jim van Eeden <jim@starapple.nl>
  */
 public interface IGame {
-    void setupGame(List<IOPlayer> players) throws Exception;
-    void playRound(int roundNumber);
-    boolean isGameOver();
-    void finish() throws Exception;
     void saveGame() throws Exception;
 }

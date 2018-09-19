@@ -19,7 +19,7 @@
 
 package com.theaigames.core.game;
 
-import com.theaigames.core.game.logic.LogicHandler;
+import com.theaigames.core.game.logic.ILogicHandler;
 import com.theaigames.core.Engine;
 import com.theaigames.core.io.IOPlayer;
 
@@ -37,12 +37,9 @@ import com.theaigames.core.io.IOPlayer;
 public abstract class AbstractGame implements IGame {
 
     protected Engine engine;
-    protected LogicHandler processor;
-
-    private int maxRounds;
+    protected ILogicHandler logic;
 
     public AbstractGame() {
-        maxRounds = -1; // set this later if there is a maximum amount of rounds for this game
         engine = new Engine();
     }
 
@@ -50,37 +47,15 @@ public abstract class AbstractGame implements IGame {
      * Set logic in the engine and start it to run the game
      */
     public void run() throws Exception {
-        engine.setGame(this);
+        engine.setLogic(logic);
         engine.start();
-    }
-
-    /**
-     * @return : True when the game is over
-     */
-    @Override
-    public boolean isGameOver() {
-        return this.processor.isGameOver()
-                || (this.maxRounds >= 0 && this.processor.getRoundNumber() > this.maxRounds);
-    }
-
-    /**
-     * Play one round of the game
-     *
-     * @param roundNumber : round number
-     */
-    @Override
-    public void playRound(int roundNumber) {
-        for (IOPlayer ioPlayer : this.engine.getPlayers())
-            ioPlayer.addToDump(String.format("Round %d", roundNumber));
-
-        this.processor.playRound(roundNumber);
+        this.finish();
     }
 
     /**
      * close the bot processes, save, exit program
      */
-    @Override
-    public void finish() throws Exception {
+    private void finish() throws Exception {
         // stop the bots
         this.engine.getPlayers().forEach(IOPlayer::finish);
         Thread.sleep(100);
@@ -100,10 +75,10 @@ public abstract class AbstractGame implements IGame {
      * Does everything that is needed to store the output of a game
      */
     public void saveGame() {
-        System.out.println("winner: " + this.processor.getWinner().getName());
+        System.out.println("winner: " + this.logic.getWinner().getName());
 
         // save results to file here
-        String playedGame = this.processor.getPlayedGame();
+        String playedGame = this.logic.getPlayedGame();
         System.out.println(playedGame);
     }
 }
