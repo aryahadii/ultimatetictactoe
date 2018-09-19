@@ -23,6 +23,7 @@ import com.theaigames.engine.io.IOPlayer;
 import com.theaigames.game.player.AbstractPlayer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Logic interface
@@ -34,7 +35,7 @@ import java.util.ArrayList;
  * @author Jackie Xu <jackie@starapple.nl>, Jim van Eeden <jim@starapple.nl>
  */
 public interface Logic {
-    void setupGame(ArrayList<IOPlayer> players) throws Exception; // create the players, set up the game
+    void setupGame(List<IOPlayer> players) throws Exception; // create the players, set up the game
     void playRound(int roundNumber); // play a round
     boolean isGameOver(); // check if the game is over
     void finish() throws Exception; // wrap things up
