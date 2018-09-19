@@ -2,8 +2,8 @@
 
 package com.theaigames.tictactoe.moves;
 
-import com.theaigames.game.moves.AbstractMove;
-import com.theaigames.game.player.AbstractPlayer;
+import com.theaigames.core.game.moves.AbstractMove;
+import com.theaigames.core.game.player.AbstractPlayer;
 
 public class Move extends AbstractMove {
 

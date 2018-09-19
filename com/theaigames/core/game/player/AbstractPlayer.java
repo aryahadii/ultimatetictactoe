@@ -17,11 +17,11 @@
  *     file that was distributed with this source code.
  */
 
-package com.theaigames.game.player;
+package com.theaigames.core.game.player;
 
 import java.io.IOException;
 
-import com.theaigames.engine.io.IOPlayer;
+import com.theaigames.core.io.IOPlayer;
 
 /**
  * AbstractPlayer class

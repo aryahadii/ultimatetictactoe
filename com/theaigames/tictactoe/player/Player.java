@@ -19,9 +19,8 @@
 
 package com.theaigames.tictactoe.player;
 
-import com.theaigames.engine.io.IOPlayer;
-import com.theaigames.game.player.AbstractPlayer;
-import com.theaigames.tictactoe.field.Field;
+import com.theaigames.core.io.IOPlayer;
+import com.theaigames.core.game.player.AbstractPlayer;
 
 public class Player extends AbstractPlayer {
 

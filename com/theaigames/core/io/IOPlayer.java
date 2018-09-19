@@ -17,7 +17,7 @@
  *     file that was distributed with this source code.
  */
 
-package com.theaigames.engine.io;
+package com.theaigames.core.io;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

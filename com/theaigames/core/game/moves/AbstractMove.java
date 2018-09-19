@@ -17,9 +17,9 @@
  *     file that was distributed with this source code.
  */
 
-package com.theaigames.game.moves;
+package com.theaigames.core.game.moves;
 
-import com.theaigames.game.player.AbstractPlayer;
+import com.theaigames.core.game.player.AbstractPlayer;
 
 /**
  * abstract class AbstractGame

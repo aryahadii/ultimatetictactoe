@@ -17,19 +17,19 @@
  *     file that was distributed with this source code.
  */
 
-package com.theaigames.tictactoe;
+package com.theaigames.tictactoe.logic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.theaigames.game.player.AbstractPlayer;
+import com.theaigames.core.game.logic.LogicHandler;
+import com.theaigames.core.game.player.AbstractPlayer;
 import com.theaigames.tictactoe.field.Field;
 import com.theaigames.tictactoe.moves.Move;
 import com.theaigames.tictactoe.moves.MoveResult;
 import com.theaigames.tictactoe.player.Player;
-import com.theaigames.game.GameHandler;
 
-public class Processor implements GameHandler {
+public class TicTacToeLogic implements LogicHandler {
 
     private int mMoveNumber = 1;
     private int mRoundNumber = -1;
@@ -39,7 +39,7 @@ public class Processor implements GameHandler {
     private Field mField;
     private int mGameOverByPlayerErrorPlayerId = 0;
 
-    public Processor(List<Player> players, Field field) {
+    public TicTacToeLogic(List<Player> players, Field field) {
         mPlayers = players;
         mField = field;
         mMoves = new ArrayList<>();

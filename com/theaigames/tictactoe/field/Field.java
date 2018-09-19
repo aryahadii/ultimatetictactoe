@@ -19,7 +19,6 @@
 
 package com.theaigames.tictactoe.field;
 
-import com.theaigames.util.Util;
 
 public class Field {
     private int[][] mBoard;
@@ -43,6 +42,10 @@ public class Field {
                 mBoard[x][y] = 0;
             }
         }
+    }
+
+    private static String padRight(String s, int n) {
+        return String.format("%1$-" + n + "s", s);
     }
 
     public void dumpBoard() {
@@ -73,7 +76,7 @@ public class Field {
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
 
-                System.out.print(Util.padRight(mMacroboard[x][y] + "", 3));
+                System.out.print(padRight(mMacroboard[x][y] + "", 3));
             }
             System.out.print("\n");
         }

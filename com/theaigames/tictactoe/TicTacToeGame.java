@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.theaigames.engine.io.IOPlayer;
-import com.theaigames.game.AbstractGame;
+import com.theaigames.core.io.IOPlayer;
+import com.theaigames.core.game.AbstractGame;
 import com.theaigames.tictactoe.field.Field;
+import com.theaigames.tictactoe.logic.TicTacToeLogic;
 import com.theaigames.tictactoe.player.Player;
 
 public class TicTacToeGame extends AbstractGame {
@@ -43,7 +44,7 @@ public class TicTacToeGame extends AbstractGame {
         }
         this.players.forEach(this::sendGameSettings);
 
-        super.processor = new Processor(this.players, this.gameField);
+        super.processor = new TicTacToeLogic(this.players, this.gameField);
     }
 
     private void sendGameSettings(Player player) {

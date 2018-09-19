@@ -17,11 +17,11 @@
  *     file that was distributed with this source code.
  */
 
-package com.theaigames.game;
+package com.theaigames.core.game;
 
-import com.theaigames.engine.Engine;
-import com.theaigames.engine.IGame;
-import com.theaigames.engine.io.IOPlayer;
+import com.theaigames.core.game.logic.LogicHandler;
+import com.theaigames.core.Engine;
+import com.theaigames.core.io.IOPlayer;
 
 /**
  * abstract class AbstractGame
@@ -37,7 +37,7 @@ import com.theaigames.engine.io.IOPlayer;
 public abstract class AbstractGame implements IGame {
 
     protected Engine engine;
-    protected GameHandler processor;
+    protected LogicHandler processor;
 
     private int maxRounds;
 

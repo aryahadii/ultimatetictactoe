@@ -17,12 +17,10 @@
  *     file that was distributed with this source code.
  */
 
-package com.theaigames.engine;
+package com.theaigames.core.game;
 
-import com.theaigames.engine.io.IOPlayer;
-import com.theaigames.game.player.AbstractPlayer;
+import com.theaigames.core.io.IOPlayer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
