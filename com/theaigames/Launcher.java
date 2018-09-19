@@ -1,6 +1,6 @@
 package com.theaigames;
 
-import com.theaigames.tictactoe.TicTacToe;
+import com.theaigames.tictactoe.TicTacToeGame;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.List;
 public class Launcher {
 
     private static void runGame(List<String> botsExecPaths) throws Exception {
-        TicTacToe game = new TicTacToe(botsExecPaths);
+        TicTacToeGame game = new TicTacToeGame(botsExecPaths);
         game.run();
     }
 
