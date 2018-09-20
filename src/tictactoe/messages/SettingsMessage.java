@@ -5,6 +5,7 @@ import java.util.List;
 
 public class SettingsMessage extends AbstractMessage {
     private List<String> playersName;
+    private String botId;
     private int msMoveTimeout, msTimeLimit;
 
     public SettingsMessage() {
@@ -33,5 +34,13 @@ public class SettingsMessage extends AbstractMessage {
 
     public int getTimeLimitInMs() {
         return msTimeLimit;
+    }
+
+    public void setBotId(String botId) {
+        this.botId = botId;
+    }
+
+    public String getBotId() {
+        return botId;
     }
 }
