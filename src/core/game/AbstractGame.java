@@ -22,6 +22,9 @@ package src.core.game;
 import src.core.game.logic.ILogicHandler;
 import src.core.Engine;
 import src.core.io.IOPlayer;
+import src.representers.FieldRepresenter;
+
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * abstract class AbstractGame
@@ -56,7 +59,6 @@ public abstract class AbstractGame implements IGame {
      * close the bot processes, save, exit program
      */
     private void finish() throws Exception {
-        // stop the bots
         this.engine.getPlayers().forEach(IOPlayer::finish);
         Thread.sleep(100);
 

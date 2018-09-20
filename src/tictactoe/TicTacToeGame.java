@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import src.core.game.AbstractGame;
+import src.representers.FieldRepresenter;
 import src.tictactoe.commands.ServerSettingsCommand;
 import src.tictactoe.field.Field;
 import src.tictactoe.messages.SettingsMessage;
@@ -13,15 +14,26 @@ import src.tictactoe.logic.TicTacToeLogic;
 import src.tictactoe.player.Player;
 
 public class TicTacToeGame extends AbstractGame {
+    private static TicTacToeGame instance = null;
 
     private final int TIME_BANK_MAX_MS = 10000;
     private final int MOVE_TIMEOUT_MS = 500;
     private List<Player> players;
     private Field gameField;
 
-    public TicTacToeGame(List<String> botsExecPaths) throws IOException {
-        super();
 
+    public static TicTacToeGame getInstance() {
+        if (instance == null) {
+            instance = new TicTacToeGame();
+        }
+        return instance;
+    }
+
+    private TicTacToeGame() {
+        super();
+    }
+
+    public void addBots(List<String> botsExecPaths) throws IOException {
         this.addPlayersToEngine(botsExecPaths);
         this.setupGame();
     }
@@ -63,4 +75,7 @@ public class TicTacToeGame extends AbstractGame {
         player.sendCommand(new ServerSettingsCommand(settingsMessage));
     }
 
+    public FieldRepresenter getFieldData() {
+        return FieldRepresenter.fromField(((TicTacToeLogic) this.logic).getField());
+    }
 }

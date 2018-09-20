@@ -368,4 +368,8 @@ public class Field {
         }
         return false;
     }
+
+    public int[][] getBoard() {
+        return mBoard;
+    }
 }
