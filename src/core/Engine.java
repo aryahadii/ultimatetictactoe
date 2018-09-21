@@ -21,12 +21,10 @@ package src.core;
 
 import src.core.game.logic.ILogicHandler;
 import src.core.io.IOPlayer;
-import src.representers.FieldRepresenter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Engine class

@@ -1,7 +1,6 @@
 package src.ui.main;
 
-import src.representers.FieldRepresenter;
-import src.representers.Space;
+import src.representers.BoardRepresenter;
 import src.tictactoe.TicTacToeGame;
 
 import java.util.Timer;
@@ -25,7 +24,7 @@ public class MainController {
     }
 
     private void updateFieldUI() {
-        FieldRepresenter representer = TicTacToeGame.getInstance().getFieldData();
+        BoardRepresenter representer = TicTacToeGame.getInstance().getBoardData();
         // TODO
     }
 

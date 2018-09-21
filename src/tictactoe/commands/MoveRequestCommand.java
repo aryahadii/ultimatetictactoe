@@ -1,30 +1,20 @@
 package src.tictactoe.commands;
 
-import org.json.simple.JSONObject;
 import src.core.game.commands.AbstractCommand;
 import src.tictactoe.messages.MoveRequestMessage;
 
 public class MoveRequestCommand extends AbstractCommand {
+    public static final String COMMAND_TYPE = "move";
 
     public MoveRequestCommand(MoveRequestMessage msg) {
         super(msg);
-    }
 
-    public JSONObject toJson() {
-        JSONObject representation = new JSONObject();
         representation.put("command", getCommandType());
-        representation.put("time_limit", ((MoveRequestMessage) msg).getTimeLimit());
-        return representation;
-    }
-
-    @Override
-    public String toJsonString() {
-        return toJson().toString();
+        representation.put("time_limit", msg.getTimeLimit());
     }
 
     @Override
     public String getCommandType() {
-        return "move";
+        return COMMAND_TYPE;
     }
-
 }

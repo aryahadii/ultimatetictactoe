@@ -1,7 +1,9 @@
 package src.tictactoe.messages;
 
+import src.tictactoe.field.Location;
+
 public class PlaceMessage extends AbstractMessage {
-    int x, y;
+    private int x, y;
 
     public PlaceMessage(int x, int y) {
         this.x = x;
@@ -14,5 +16,9 @@ public class PlaceMessage extends AbstractMessage {
 
     public int getY() {
         return y;
+    }
+
+    public Location toLocation() {
+        return new Location(x, y);
     }
 }

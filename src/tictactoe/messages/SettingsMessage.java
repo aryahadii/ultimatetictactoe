@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SettingsMessage extends AbstractMessage {
     private List<String> playersName;
-    private String botId;
+    private int botId;
     private int msMoveTimeout, msTimeLimit;
 
     public SettingsMessage() {
@@ -28,7 +28,7 @@ public class SettingsMessage extends AbstractMessage {
         return msMoveTimeout;
     }
 
-    public void setTimelimitInMs(int limit) {
+    public void setTimeLimitInMs(int limit) {
         msTimeLimit = limit;
     }
 
@@ -36,11 +36,11 @@ public class SettingsMessage extends AbstractMessage {
         return msTimeLimit;
     }
 
-    public void setBotId(String botId) {
+    public void setBotId(int botId) {
         this.botId = botId;
     }
 
-    public String getBotId() {
+    public int getBotId() {
         return botId;
     }
 }

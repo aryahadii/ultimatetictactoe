@@ -24,11 +24,10 @@ import src.core.game.logic.ILogicHandler;
 import src.core.game.player.AbstractPlayer;
 import src.tictactoe.commands.PlaceCommand;
 import src.tictactoe.commands.RoundUpdateCommand;
-import src.tictactoe.field.Field;
+import src.tictactoe.field.Board;
 import src.tictactoe.messages.PlaceMessage;
 import src.tictactoe.messages.RoundUpdateMessage;
 import src.tictactoe.moves.Move;
-import src.tictactoe.moves.MoveResult;
 import src.tictactoe.player.Player;
 
 import java.util.ArrayList;
@@ -39,15 +38,15 @@ public class TicTacToeLogic implements ILogicHandler {
     private int mMoveNumber = 1;
     private List<Player> mPlayers;
     private List<Move> mMoves;
-    private List<MoveResult> mMoveResults;
-    private Field mField;
+    //    private List<MoveResult> mMoveResults;
+    private Board mBoard;
     private int mGameOverByPlayerErrorPlayerId = 0;
 
-    public TicTacToeLogic(List<Player> players, Field field) {
+    public TicTacToeLogic(List<Player> players, Board board) {
         mPlayers = players;
-        mField = field;
+        mBoard = board;
         mMoves = new ArrayList<>();
-        mMoveResults = new ArrayList<>();
+//        mMoveResults = new ArrayList<>();
     }
 
     @Override
@@ -75,50 +74,45 @@ public class TicTacToeLogic implements ILogicHandler {
     }
 
     private void sendUpdateToPlayer(Player player, int roundNumber) {
-        RoundUpdateMessage roundUpdateMsg = createRoundUpdateMsg(mField, mMoveNumber, roundNumber);
+        RoundUpdateMessage roundUpdateMsg = createRoundUpdateMsg(mBoard, mMoveNumber, roundNumber);
         player.sendCommand(new RoundUpdateCommand(roundUpdateMsg));
     }
 
-    private RoundUpdateMessage createRoundUpdateMsg(Field field, int moveNumber, int roundNumber) {
+    private RoundUpdateMessage createRoundUpdateMsg(Board board, int moveNumber, int roundNumber) {
         RoundUpdateMessage msg = new RoundUpdateMessage();
         msg.setRoundNumber(roundNumber);
         msg.setMoveNumber(moveNumber);
-        msg.setField(field);
+        msg.setBoard(board);
         return msg;
     }
 
-    /**
-     * Parses player response and inserts disc in field
-     *
-     * @return : true if valid move, otherwise false
-     */
     private void doPlayerCommand(PlaceCommand command, Player player) {
-        String oldFieldPresentation = mField.toPresentationString(player.getId(), true);
+//        String oldFieldPresentation = mBoard.toPresentationString(player.getId(), true);
 
         try {
             PlaceMessage placeMessage = (PlaceMessage) command.getMessage();
-            mField.placeDisc(placeMessage.getX(), placeMessage.getY(), player.getId());
+            mBoard.placeMark(placeMessage.toLocation(), player.getId());
         } catch (Exception e) {
             player.getBot().outputEngineWarning(e.getMessage());
         }
 
-        recordMove(player, oldFieldPresentation);
+//        recordMove(player, oldFieldPresentation);
     }
 
-    private void recordMove(Player player, String oldFieldPresentationString) {
-        Move move = new Move(player);
-        move.setMove(mField.getLastX(), mField.getLastY());
-//        move.setIllegalMove(mField.getLastError());
-        mMoves.add(move);
-
-        MoveResult moveResult = new MoveResult(player, move, oldFieldPresentationString, mField);
-        moveResult.setMoveNumber(mMoveNumber);
-        mMoveResults.add(moveResult);
-    }
+//    private void recordMove(Player player, String oldFieldPresentationString) {
+//        Move move = new Move(player);
+//        move.setMove(mBoard.getLastX(), mBoard.getLastY());
+////        move.setIllegalMove(mBoard.getLastError());
+//        mMoves.add(move);
+//
+//        MoveResult moveResult = new MoveResult(player, move, oldFieldPresentationString, mBoard);
+//        moveResult.setMoveNumber(mMoveNumber);
+//        mMoveResults.add(moveResult);
+//    }
 
     @Override
     public AbstractPlayer getWinner() {
-        int winner = mField.getWinner();
+        int winner = mBoard.getWinnerPlayerId();
         if (mGameOverByPlayerErrorPlayerId > 0) { /* Game over due to too many player errors. Look up the other player, which became the winner */
             for (Player player : mPlayers) {
                 if (player.getId() != mGameOverByPlayerErrorPlayerId) {
@@ -126,7 +120,7 @@ public class TicTacToeLogic implements ILogicHandler {
                 }
             }
         }
-        if (winner != 0) {
+        if (winner != Board.EMPTY_SPACE) {
             for (Player player : mPlayers) {
                 if (player.getId() == winner) {
                     return player;
@@ -141,22 +135,12 @@ public class TicTacToeLogic implements ILogicHandler {
         return "";
     }
 
-
-    /**
-     * Returns a List of Moves played in this game
-     *
-     * @return : List with Move objects
-     */
-    public List<Move> getMoves() {
-        return mMoves;
-    }
-
-    public Field getField() {
-        return mField;
-    }
-
     @Override
     public boolean isGameOver() {
-        return (!mField.isMoveAvailable() || getWinner() != null);
+        return (!mBoard.hasPossibleMove() || getWinner() != null);
+    }
+
+    public Board getBoard() {
+        return mBoard;
     }
 }

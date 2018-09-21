@@ -1,13 +1,13 @@
 package src.tictactoe.messages;
 
-import src.tictactoe.field.Field;
+import src.tictactoe.field.Board;
 
 public class RoundUpdateMessage extends AbstractMessage {
     private int roundNumber, moveNumber;
-    private Field field;
+    private Board board;
 
-    public void setField(Field field) {
-        this.field = field;
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     public void setRoundNumber(int roundNumber) {
@@ -19,7 +19,7 @@ public class RoundUpdateMessage extends AbstractMessage {
     }
 
     public String getFieldRepresentation() {
-        return field.toString();
+        return board.toString();
     }
 
     public int getMoveNumber() {

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 import src.core.game.AbstractGame;
-import src.representers.FieldRepresenter;
+import src.representers.BoardRepresenter;
 import src.tictactoe.commands.ServerSettingsCommand;
-import src.tictactoe.field.Field;
+import src.tictactoe.field.Board;
 import src.tictactoe.messages.SettingsMessage;
 import src.tictactoe.logic.TicTacToeLogic;
 import src.tictactoe.player.Player;
@@ -19,7 +19,6 @@ public class TicTacToeGame extends AbstractGame {
     private final int TIME_BANK_MAX_MS = 10000;
     private final int MOVE_TIMEOUT_MS = 500;
     private List<Player> players;
-    private Field gameField;
 
 
     public static TicTacToeGame getInstance() {
@@ -46,8 +45,6 @@ public class TicTacToeGame extends AbstractGame {
     }
 
     private void setupGame() {
-        this.gameField = new Field();
-
         this.players = new ArrayList<>();
         for (int i = 0; i < engine.getPlayers().size(); i++) {
             String playerName = String.format("player%d", i + 1);
@@ -57,25 +54,26 @@ public class TicTacToeGame extends AbstractGame {
         }
         this.players.forEach(this::sendGameSettings);
 
-        super.logic = new TicTacToeLogic(this.players, this.gameField);
+        super.logic = new TicTacToeLogic(this.players, new Board());
     }
 
-    private SettingsMessage createGameSettings() {
+    private SettingsMessage createGameSettings(Player player) {
         SettingsMessage gameSettingsMessage = new SettingsMessage();
-        for (Player player : this.players) {
-            gameSettingsMessage.addPlayerName(player.getName());
+        for (Player p : this.players) {
+            gameSettingsMessage.addPlayerName(p.getName());
         }
+        gameSettingsMessage.setBotId(player.getId());
         gameSettingsMessage.setMoveTimeoutInMs(MOVE_TIMEOUT_MS);
-        gameSettingsMessage.setTimelimitInMs(TIME_BANK_MAX_MS);
+        gameSettingsMessage.setTimeLimitInMs(TIME_BANK_MAX_MS);
         return gameSettingsMessage;
     }
 
     private void sendGameSettings(Player player) {
-        SettingsMessage settingsMessage = createGameSettings();
+        SettingsMessage settingsMessage = createGameSettings(player);
         player.sendCommand(new ServerSettingsCommand(settingsMessage));
     }
 
-    public FieldRepresenter getFieldData() {
-        return FieldRepresenter.fromField(((TicTacToeLogic) this.logic).getField());
+    public BoardRepresenter getBoardData() {
+        return BoardRepresenter.fromBoard(((TicTacToeLogic) this.logic).getBoard());
     }
 }
