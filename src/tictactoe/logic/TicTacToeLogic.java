@@ -24,7 +24,7 @@ import src.core.game.logic.ILogicHandler;
 import src.core.game.player.AbstractPlayer;
 import src.tictactoe.commands.PlaceCommand;
 import src.tictactoe.commands.RoundUpdateCommand;
-import src.tictactoe.field.Board;
+import src.tictactoe.board.Board;
 import src.tictactoe.messages.PlaceMessage;
 import src.tictactoe.messages.RoundUpdateMessage;
 import src.tictactoe.moves.Move;

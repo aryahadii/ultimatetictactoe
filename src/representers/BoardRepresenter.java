@@ -1,6 +1,6 @@
 package src.representers;
 
-import src.tictactoe.field.Board;
+import src.tictactoe.board.Board;
 
 public class BoardRepresenter {
     private Mark[][] board;

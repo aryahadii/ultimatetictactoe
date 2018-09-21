@@ -1,6 +1,6 @@
 package src.tictactoe.messages;
 
-import src.tictactoe.field.Board;
+import src.tictactoe.board.Board;
 
 public class RoundUpdateMessage extends AbstractMessage {
     private int roundNumber, moveNumber;

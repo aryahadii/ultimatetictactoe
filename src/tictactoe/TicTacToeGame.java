@@ -8,7 +8,7 @@ import java.util.UUID;
 import src.core.game.AbstractGame;
 import src.representers.BoardRepresenter;
 import src.tictactoe.commands.ServerSettingsCommand;
-import src.tictactoe.field.Board;
+import src.tictactoe.board.Board;
 import src.tictactoe.messages.SettingsMessage;
 import src.tictactoe.logic.TicTacToeLogic;
 import src.tictactoe.player.Player;

@@ -1,4 +1,4 @@
-package src.tictactoe.field;
+package src.tictactoe.board;
 
 class LocalBoard {
     static final int EMPTY_SPACE = 0;

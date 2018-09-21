@@ -1,4 +1,4 @@
-package src.tictactoe.field;
+package src.tictactoe.board;
 
 public class Location {
     private final int x, y;

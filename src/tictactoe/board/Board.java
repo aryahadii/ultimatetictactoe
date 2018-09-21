@@ -17,7 +17,7 @@
  *     file that was distributed with this source code.
  */
 
-package src.tictactoe.field;
+package src.tictactoe.board;
 
 public class Board {
     public static final int EMPTY_SPACE = LocalBoard.EMPTY_SPACE;
