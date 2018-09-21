@@ -66,8 +66,6 @@ public abstract class AbstractGame implements IGame {
         }
 
         System.out.println("Done.");
-
-        System.exit(0);
     }
 
     /**
@@ -75,9 +73,5 @@ public abstract class AbstractGame implements IGame {
      */
     public void saveGame() {
         System.out.println("winner: " + this.logic.getWinner().getName());
-
-        // save results to file here
-        String playedGame = this.logic.getPlayedGame();
-        System.out.println(playedGame);
     }
 }

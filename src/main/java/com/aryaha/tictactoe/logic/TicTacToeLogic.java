@@ -38,7 +38,6 @@ public class TicTacToeLogic implements ILogicHandler {
     private int mMoveNumber = 1;
     private List<Player> mPlayers;
     private List<Move> mMoves;
-    //    private List<MoveResult> mMoveResults;
     private Board mBoard;
     private int mGameOverByPlayerErrorPlayerId = 0;
 
@@ -46,13 +45,12 @@ public class TicTacToeLogic implements ILogicHandler {
         mPlayers = players;
         mBoard = board;
         mMoves = new ArrayList<>();
-//        mMoveResults = new ArrayList<>();
     }
 
     @Override
     public void playRound(int roundNumber) {
         for (Player player : mPlayers) {
-            sleep(500);
+            sleep(200);
 
             if (isGameOver()) {
                 return;
@@ -96,28 +94,13 @@ public class TicTacToeLogic implements ILogicHandler {
     }
 
     private void doPlayerCommand(PlaceCommand command, Player player) {
-//        String oldFieldPresentation = mBoard.toPresentationString(player.getId(), true);
-
         try {
             PlaceMessage placeMessage = (PlaceMessage) command.getMessage();
             mBoard.placeMark(placeMessage.toLocation(), player.getId());
         } catch (Exception e) {
             player.getBot().outputEngineWarning(e.getMessage());
         }
-
-//        recordMove(player, oldFieldPresentation);
     }
-
-//    private void recordMove(Player player, String oldFieldPresentationString) {
-//        Move move = new Move(player);
-//        move.setMove(mBoard.getLastX(), mBoard.getLastY());
-////        move.setIllegalMove(mBoard.getLastError());
-//        mMoves.add(move);
-//
-//        MoveResult moveResult = new MoveResult(player, move, oldFieldPresentationString, mBoard);
-//        moveResult.setMoveNumber(mMoveNumber);
-//        mMoveResults.add(moveResult);
-//    }
 
     @Override
     public AbstractPlayer getWinner() {

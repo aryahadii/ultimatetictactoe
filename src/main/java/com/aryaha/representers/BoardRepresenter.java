@@ -18,8 +18,8 @@ public class BoardRepresenter {
 
     public static BoardRepresenter fromBoard(Board board) {
         BoardRepresenter newRepresenter = new BoardRepresenter();
-        for (int y = 0; y < Board.rowsCount; y++) {
-            for (int x = 0; x < Board.colsCount; x++) {
+        for (int y = 0; y < rowsCount; y++) {
+            for (int x = 0; x < colsCount; x++) {
                 Location loc = new Location(x, y);
                 newRepresenter.board[y][x] = board.getMark(loc);
             }

@@ -52,10 +52,10 @@ public class Board {
     }
 
     private boolean isMarkValid(Location markLoc) {
-        if (markLoc.getX() >= colsCount || markLoc.getX() < 0) {
+        if (markLoc.getX() >= colsCount * 3 || markLoc.getX() < 0) {
             return false;
         }
-        if (markLoc.getY() >= rowsCount || markLoc.getY() < 0) {
+        if (markLoc.getY() >= rowsCount * 3|| markLoc.getY() < 0) {
             return false;
         }
         if (!isInActiveLocalBoard(markLoc)) {
@@ -69,8 +69,11 @@ public class Board {
             return true;
         }
 
-        Location lastLocalBoardLoc = getLocalBoardLocation(lastMarkLoc);
-        return isMarkInLocalBoard(markLoc, lastLocalBoardLoc);
+        Location activeLocalBoardLoc = new Location(lastMarkLoc.getX() % 3, lastMarkLoc.getY() % 3);
+        if (localBoards[activeLocalBoardLoc.getY()][activeLocalBoardLoc.getX()].getWinnerPlayerId() != LocalBoard.EMPTY_CELL) {
+            return true;
+        }
+        return isMarkInLocalBoard(markLoc, activeLocalBoardLoc);
 
     }
 
@@ -91,8 +94,8 @@ public class Board {
     }
 
     private Location getLocalBoardLocation(Location mark) {
-        int x = (mark.getX() / colsCount);
-        int y = (mark.getY() / rowsCount);
+        int x = mark.getX() / colsCount;
+        int y = mark.getY() / rowsCount;
         return new Location(x, y);
     }
 
