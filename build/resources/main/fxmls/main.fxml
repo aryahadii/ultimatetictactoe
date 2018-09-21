@@ -12,8 +12,8 @@
     <children>
         <AnchorPane prefHeight="36.0" prefWidth="600.0">
             <children>
-                <Label layoutX="8.0" layoutY="10.0" text="Team A" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0" />
-                <Label layoutX="527.0" layoutY="10.0" text="Team B" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
+                <Label layoutX="8.0" layoutY="10.0" text="Team A" textFill="#9a0c0c" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0" />
+                <Label layoutX="527.0" layoutY="10.0" text="Team B" textFill="#0a6bbf" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0" />
             </children>
         </AnchorPane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
